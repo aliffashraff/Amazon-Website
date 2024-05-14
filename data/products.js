@@ -656,5 +656,35 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: 'id1',
+    image: 'images/products/backpack.jpg',
+    name: 'Intermediate Size Travelling Backpack',
+    rating: {
+      stars: 4.0,
+      count: 327
+    },
+    priceCents: 6700,
+    keywords: [
+      'bags',
+      'travel',
+      'outdoor'
+    ]
+  },
+  {
+    id: 'id2',
+    image: 'images/products/umbrella.jpg',
+    name: 'Adult Size Plain Umbrella',
+    rating: {
+      stars: 4.5,
+      count: 110
+    },
+    priceCents: 1250,
+    keywords: [
+      'umbrella',
+      'rain',
+      'outdoor'
+    ]
   }
 ];
