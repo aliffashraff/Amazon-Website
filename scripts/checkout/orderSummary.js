@@ -114,6 +114,7 @@ export function renderOrderSummary() {
       container.remove();
 
       updateCartQuantity();
+      renderpaymentSummary();
     });
   });
 
