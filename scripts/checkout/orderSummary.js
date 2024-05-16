@@ -125,10 +125,6 @@ export function renderOrderSummary() {
 
       //focus on the input quantity
       document.querySelector(`.js-quantity-input-${productId}`).focus();
-
-      //highlight the quantity in input field
-      const input = document.querySelector(`.js-quantity-input-${productId}`);
-      input.setSelectionRange(0, input.value.length);
     });
   });
 
@@ -181,7 +177,7 @@ export function renderOrderSummary() {
         else updateQuantity(productId, newQuantity);
 
         renderCheckoutHeader();
-        renderOrderSummary
+        renderOrderSummary();
         renderPaymentSummary();
       }
     });
