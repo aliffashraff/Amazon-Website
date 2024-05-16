@@ -3,9 +3,11 @@ import {
 } from "../../data/cart.js";
 import {products, getProducts} from "../../data/products.js";
 import {formatCurrency} from "../utils/money.js";
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
-import {renderpaymentSummary} from "./paymentSummary.js";
+import {
+  deliveryOptions, getDeliveryOption, calculateDeliveryDate
+} from '../../data/deliveryOptions.js';
+import {renderPaymentSummary} from "./paymentSummary.js";
+import {renderCheckoutHeader} from "./checkoutHeader.js";
 
 export function renderOrderSummary() {
 
@@ -21,9 +23,7 @@ export function renderOrderSummary() {
 
     const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'day');
-    const dateString = deliveryDate.format('dddd, MMMM D');
+    const dateString = calculateDeliveryDate(deliveryOption);
 
     cartSummaryHTML += `
       <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
@@ -73,9 +73,7 @@ export function renderOrderSummary() {
     let html = ''
 
     deliveryOptions.forEach((deliveryOption) => {
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'day');
-      const dateString = deliveryDate.format('dddd, MMMM D');
+      const dateString = calculateDeliveryDate(deliveryOption);
 
       const priceString = deliveryOption.priceCents === 0
         ? 'FREE'
@@ -110,19 +108,13 @@ export function renderOrderSummary() {
       
       removeFromCart(productId);
       
-      const container = document.querySelector(`.js-cart-item-container-${productId}`);
-      container.remove();
-
-      updateCartQuantity();
-      renderpaymentSummary();
+      renderCheckoutHeader();
+      renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 
-  function updateCartQuantity() {
-    document.querySelector('.js-return-to-home-link').innerHTML = `${calculateCartQuantity()} items`;
-  }
-
-  updateCartQuantity();
+  renderCheckoutHeader();
 
   document.querySelectorAll('.js-update-quantity-link').forEach((link) => {
     link.addEventListener('click', () => {
@@ -131,7 +123,12 @@ export function renderOrderSummary() {
       
       cartItemContainer.classList.add('is-editing-quantity');
 
+      //focus on the input quantity
       document.querySelector(`.js-quantity-input-${productId}`).focus();
+
+      //highlight the quantity in input field
+      const input = document.querySelector(`.js-quantity-input-${productId}`);
+      input.setSelectionRange(0, input.value.length);
     });
   });
 
@@ -145,16 +142,14 @@ export function renderOrderSummary() {
       const quantityInput = document.querySelector(`.js-quantity-input-${productId}`).value;
       const newQuantity = Number(quantityInput);
 
-      if (newQuantity > 0 && newQuantity < 1000) {
-        updateQuantity(productId, newQuantity);
-
-        document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
-      }
-      else {
+      if (newQuantity <= 0 || newQuantity > 1000) {
         alert(`ERORR!\n\nQuantity CANNOT less than 1 and higher than 999`);
       }
+      else updateQuantity(productId, newQuantity);
 
-      updateCartQuantity();
+      renderCheckoutHeader();
+      renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 
@@ -170,6 +165,7 @@ export function renderOrderSummary() {
         const quantityInput = document.querySelector(`.js-quantity-input-${productId}`).value;
         const newQuantity = Number(quantityInput);
 
+        /*
         if (newQuantity > 0 && newQuantity < 1000) {
           updateQuantity(productId, newQuantity);
 
@@ -177,9 +173,16 @@ export function renderOrderSummary() {
         }
         else {
           alert(`ERORR!\n\nQuantity CANNOT less than 1 and higher than 999`);
-        }
+        }*/ //replace with below code for MVC
 
-        updateCartQuantity();
+        if (newQuantity <= 0 || newQuantity > 1000) {
+          alert(`ERORR!\n\nQuantity CANNOT less than 1 and higher than 999`);
+        }
+        else updateQuantity(productId, newQuantity);
+
+        renderCheckoutHeader();
+        renderOrderSummary
+        renderPaymentSummary();
       }
     });
   });
@@ -189,7 +192,7 @@ export function renderOrderSummary() {
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
-      renderpaymentSummary();
+      renderPaymentSummary();
     })
   });
 }
