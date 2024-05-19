@@ -1,5 +1,5 @@
 import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
-import {products} from '../data/products.js';
+import {products, Clothing} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
 let productsHTML = ``;
@@ -42,6 +42,12 @@ products.forEach((product) => {
           <option value="10">10</option>
         </select>
       </div>
+
+      ${product.extraInfoHTML()}
+      <!-- ${product instanceof Clothing
+        ? `<a href="${product.sizeChartLink}" target="_blank">Size chart</a>`
+        : ''
+      } -->
 
       <div class="product-spacer"></div>
 
