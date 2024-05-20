@@ -44,11 +44,7 @@ products.forEach((product) => {
       </div>
 
       ${product.extraInfoHTML()}
-      <!-- ${product instanceof Clothing
-        ? `<a href="${product.sizeChartLink}" target="_blank">Size chart</a>`
-        : ''
-      } -->
-
+     
       <div class="product-spacer"></div>
 
       <div class="added-to-cart js-added-to-cart-${product.id}">
