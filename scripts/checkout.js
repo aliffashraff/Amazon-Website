@@ -7,6 +7,23 @@ import {loadCart} from '../data/cart.js';
 //import '../data/car.js';
 //import '../data/backend-practice.js'
 
+//async make a function return a promise
+async function loadPage() {
+  await loadProductsFetch(); //wait for this response to finsih before go to next line
+
+  const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve('value3');
+    });
+  });
+
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+}
+loadPage();
+
+/*
 //run the Promises at the same time
 Promise.all([
   loadProductsFetch(),
@@ -22,6 +39,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 })
+*/
 
 /*
 new Promise((resolve) => {
