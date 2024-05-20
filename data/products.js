@@ -12,7 +12,7 @@ export function getProducts(productId) {
   return matchingProduct;
 }
 
-class Product {
+export class Product {
   id;
   image;
   name;
