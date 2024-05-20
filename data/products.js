@@ -123,7 +123,9 @@ export function loadProductsFetch() {
     });
 
     console.log('load products');
-  });
+  }).catch((error) => {
+    console.log('Error. Please try again');
+  }); //error handling in Promises using .catch
 
   return promise; //return promise out of a function
 }
@@ -134,7 +136,7 @@ loadProductsFetch().then(() => {
 });
 */
 
-/*
+
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -155,10 +157,13 @@ export function loadProducts(fun) {
     fun();
   });
 
+  xhr.addEventListener('error', (error) => {
+    console.log('Error. Please try again');
+  }) //handling error in callback
+
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-*/
 
 /*
 export const products = [

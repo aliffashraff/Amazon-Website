@@ -1,15 +1,17 @@
 import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
-import {products, loadProductsFetch} from '../data/products.js';
+import {products, loadProducts} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
+/*
 async function loadPage() {
   await loadProductsFetch();
 
   renderProductsGrid();
 }
 loadPage();
+*/
 
-//loadProductsFetch(renderProductsGrid);
+loadProducts(renderProductsGrid);
 
 function renderProductsGrid() {
 
