@@ -109,7 +109,7 @@ export function loadProductsFetch() {
   const promise = fetch(
     'https://supersimplebackend.dev/products'
   ).then((response) => {
-    return response.json(); // wait for this promise to finish before go to the next step
+    return response.json(); // wait for this promise (response.json) to finish before go to the next step
   }).then((productsData) => { //response is saved in productsData //automatic give us the JSON.parse vesion
     products = productsData.map((productDetails) => {
       if (productDetails.type === 'clothing') {
