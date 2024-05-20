@@ -103,6 +103,38 @@ object3.method();
 
 export let products = [];
 
+export function loadProductsFetch() {
+  //no need calback and set up code from XMLHttpRequest
+  //auto create a Promise
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
+    return response.json(); //for this promise to finish before go to the nex step
+  }).then((productsData) => { //response is saved in productsData //automatic give us the JSON.parse vesion
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+      else if (productDetails.type === 'appliances'){
+        return new Appliances(productDetails);
+      }
+    
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+  });
+
+  return promise; //return promise out of a funciton
+}
+
+/*
+loadProductsFetch().then(() => {
+  console.log('next step')
+});
+*/
+
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -126,6 +158,7 @@ export function loadProducts(fun) {
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
+*/
 
 /*
 export const products = [

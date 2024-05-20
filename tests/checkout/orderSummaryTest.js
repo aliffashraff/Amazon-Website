@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import {loadfromStorage, cart} from "../../data/cart.js";
-import {loadProducts} from "../../data/products.js";
+import {loadProductsFetch} from "../../data/products.js";
 
 
  describe('test suite: renderOrderSummary', () => {
@@ -10,7 +10,7 @@ import {loadProducts} from "../../data/products.js";
   //run function before all of the tests
   beforeAll((done) => {
     // done() is function provided by Jasmine - to control when to go to the next step
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
   })
