@@ -1,4 +1,4 @@
-import {cart, calculateCartQuantity} from "../../data/cart.js";
+import {cart, calculateCartQuantity, saveToStorage} from "../../data/cart.js";
 import {getProducts, products} from "../../data/products.js";
 import {deliveryOptions, getDeliveryOption} from "../../data/deliveryOptions.js";
 import {formatCurrency} from "../utils/money.js";
@@ -68,8 +68,8 @@ export function renderPaymentSummary() {
         })
       });
 
-      const order = await response.json(); //convert to JSON.parse 
-      addOrder(order);
+      const order = await response.json(); //convert response from backend to JSON.parse 
+      addOrder(order); //save the orders response to addOrder function
     }
 
     catch(error) {
@@ -78,5 +78,8 @@ export function renderPaymentSummary() {
 
     //change the url to orders.html page
     window.location.href = 'orders.html'
+
+    //set the cart = 0;
+    localStorage.removeItem('cart');
   });
 }
