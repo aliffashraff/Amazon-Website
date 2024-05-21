@@ -2,7 +2,7 @@ import {orders} from "../data/orders.js";
 import formatCurrency from "./utils/money.js";
 import {getProducts, loadProductsFetch, products} from "../data/products.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {calculateCartQuantity, cart} from "../data/cart.js";
+import {calculateCartQuantity, updateCartQuantity, buyAgain} from "../data/cart.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -64,14 +64,14 @@ function renderOrderHistory() {
             <div class="product-quantity">
               Quantity: ${productDetails.quantity}
             </div>
-            <button class="buy-again-button button-primary">
-              <img class="buy-again-icon" src="images/icons/buy-again.png">
-              <span class="buy-again-message">Buy it again</span>
+            <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${matchingProduct.id}">
+              <img class="buy-again-icon js-buy-again-icon" src="images/icons/buy-again.png">
+              <span class="buy-again-message js-buy-again-message">Buy it again</span>
             </button>
           </div>
 
-          <div class="product-actions">
-            <a href="tracking.html?orderId=123&productId=456">
+          <div class="product-actions" data-order-id="${order.id}" data-product-id="${matchingProduct.id}">
+            <a href="tracking.html?orderId=${order.id}&productId=${matchingProduct.id}">
               <button class="track-package-button button-secondary">
                 Track package
               </button>
@@ -84,12 +84,52 @@ function renderOrderHistory() {
     }
   });
 
-  document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+  updateCartQuantity();
 
   document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+
+  // Use an object to save the timeout ids
+  const addedMessageTimeouts = {};
+
+  document.querySelectorAll('.js-buy-again-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const {productId} = button.dataset;
+
+      buyAgain(productId);
+
+      updateCartQuantity();
+
+      button.innerHTML = '&#10003 Added';
+
+      setTimeout(() => {
+        // Check if there's a previous timeout for this
+        // product. If there is, we should stop it.
+        const previousTimeoutId = addedMessageTimeouts[productId];
+
+        if (previousTimeoutId) {
+          clearTimeout(previousTimeoutId);
+        }
+
+        const timeoutId = setTimeout(() => {
+          button.innerHTML = `
+            <img class="buy-again-icon js-buy-again-icon" src="images/icons/buy-again.png">
+            <span class="buy-again-message js-buy-again-message">Buy it again</span>
+          `
+        }, 2000);
+
+        // Save the timeoutId for this product
+        // so we can stop it later if we need to.
+        addedMessageTimeouts[productId] = timeoutId;
+      });   
+    });
+  });
 }
 
 function convertDate(date) {
   const dateString = dayjs(date).format('MMMM D');
   return dateString;
 }
+
+
+
+

@@ -108,3 +108,32 @@ export async function loadCartFetch() {
   const text = await response.text();
   console.log(text);
 }
+
+export function buyAgain(productId) {
+  let matchingItem;
+
+    cart.forEach((cartItem) => {
+      if (productId === cartItem.productId) {
+        matchingItem = cartItem;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    }
+
+    else {
+      cart.push({
+        productId,
+        quantity: 1,
+        deliveryOptionId: '1'
+      });
+    }
+
+  saveToStorage();
+}
+
+//update cart on the header
+export function updateCartQuantity() {
+  document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+}

@@ -1,7 +1,5 @@
-import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
+import {cart, addToCart, updateCartQuantity} from '../data/cart.js';
 import {products, loadProductsFetch} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
-
 
 async function loadPage() {
   await loadProductsFetch();
@@ -72,10 +70,6 @@ function renderProductsGrid() {
   });
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
-
-  function updateCartQuantity() {
-    document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
-  }
 
   updateCartQuantity();
 
