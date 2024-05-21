@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    /* //use XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('load', () => {
+      console.log(xhr.response);
+    });
+
+    xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+    xhr.send();
+    */
+
+    //use fetch
+    function fetchGreeting() {
+      const promise = fetch('https://supersimplebackend.dev/greeting').then((response) => {
+        return response.text();
+      }).then((text) => {
+        console.log(text);
+      });
+    }
+    
+    //use asunc await
+    async function greet() {
+      /*
+      const promise = await fetch('https://supersimplebackend.dev/greeting').then((response) => {
+        return response.text();
+      }).then((text) => {
+        console.log(text);
+      });
+      */
+      await fetchGreeting();
+    };
+    greet();
+    
+    /*
+    async function addName() {
+      try {
+        const post = await fetch('https://amazon.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: 'Aliff Ashraff'
+          })
+        });
+        
+        const response = await post.text();
+        console.log(response);
+      }
+      
+      catch(error) {
+        console.log('CORS error. Your request was blocked by the backend')
+      }
+    }
+    addName();
+    */
+
+    //throw error and create error message
+    async function addName() {
+      try {
+        const response = await fetch('https://supersimplebackend.dev/greeting', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+
+        if (response.status >= 400) {
+            throw response;
+        }
+
+        const text = await response.text();
+        console.log(text);
+      }
+      
+      catch(error) {
+        if (error.status === 400) {
+            const errorMessage = await error.json();
+            console.log(errorMessage);
+          } 
+        else {
+          console.log('Network error. Please try again later.');
+        }
+      }
+    }
+    addName();
+  </script>
+</body>
+</html>

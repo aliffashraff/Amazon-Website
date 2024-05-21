@@ -68,7 +68,7 @@ export function renderPaymentSummary() {
         })
       });
 
-      const order = await response.json();
+      const order = await response.json(); //convert to JSON.parse 
       addOrder(order);
     }
 

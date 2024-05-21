@@ -24,7 +24,7 @@ async function loadPage() {
   });
   }
 
-  //if ther is an error run catch()
+  //if there is an error run catch()
   catch (error) {
     console.log('Error. Please try again');
   }
