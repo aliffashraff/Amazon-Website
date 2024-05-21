@@ -2,7 +2,7 @@ import {renderOrderSummary} from './checkout/orderSummary.js';
 import{renderPaymentSummary} from './checkout/paymentSummary.js';
 import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
 import {loadProductsFetch} from '../data/products.js';
-import {loadCart} from '../data/cart.js';
+import {loadCartFetch} from '../data/cart.js';
 //import '../data/cart-class.js'; //import all from the file
 //import '../data/car.js';
 //import '../data/backend-practice.js'
@@ -12,16 +12,13 @@ async function loadPage() {
   //code that can cause an error
   try {
     //throw 'error1'; //manually create errors
+    await Promise.all([
+      loadProductsFetch(),
+      loadCartFetch()
+    ])
+    //await loadProductsFetch(); //wait for this response to finsih before go to next line
 
-    await loadProductsFetch(); //wait for this response to finsih before go to next line
-
-  const value = await new Promise((resolve, reject) => {
-    //throw 'error2'
-    loadCart(() => {
-      //reject('error3'); //create error for the future
-      resolve('value3');
-    });
-  });
+    //await loadCartFetch();
   }
 
   //if there is an error run catch()

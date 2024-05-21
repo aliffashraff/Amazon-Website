@@ -8,11 +8,14 @@ import {loadProductsFetch} from "../../data/products.js";
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
 
   //run function before all of the tests
-  beforeAll((done) => {
+  beforeAll(async () => {
+    /*
     // done() is function provided by Jasmine - to control when to go to the next step
     loadProductsFetch().then(() => {
       done();
     });
+    */
+    await loadProductsFetch();
   })
 
   // beforeEach hook - before each of test will run this code
