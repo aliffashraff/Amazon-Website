@@ -1,8 +1,8 @@
 import {orders} from "../data/orders.js";
 import formatCurrency from "./utils/money.js";
-import {getProducts, loadProductsFetch, products} from "../data/products.js";
+import {getProducts, loadProductsFetch} from "../data/products.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {calculateCartQuantity, updateCartQuantity, buyAgain} from "../data/cart.js";
+import {updateCartQuantity, buyAgain} from "../data/cart.js";
 
 async function loadPage() {
   await loadProductsFetch();
