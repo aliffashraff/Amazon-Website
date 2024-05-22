@@ -21,8 +21,17 @@ function renderProductsGrid() {
   // filter the products that match the search.
   if (search) {
     filterdProducts = products.filter((product) => {
-      return product.name.includes(search);
-    })
+      let matchingKeywords = false;
+
+      product.keywords.forEach((keyword) => {
+        if (keyword.toLowerCase().includes(search.toLowerCase())) {
+          matchingKeywords = true;
+        }
+      });
+
+      //if matchingKeywords true or product name (insesnitive) return the product
+      return  matchingKeywords || product.name.toLowerCase().includes(search.toLowerCase());
+    });
   }
 
   filterdProducts.forEach((product) => {
