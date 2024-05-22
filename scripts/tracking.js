@@ -2,6 +2,7 @@ import {updateCartQuantity} from "../data/cart.js";
 import {getOrder} from "../data/orders.js";
 import {loadProductsFetch, getProducts} from "../data/products.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+import {searchProduct} from "./search.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -32,6 +33,8 @@ function renderTracking() {
   const deliveryTime = dayjs(matchingOrderProduct.estimatedDeliveryTime);
   //can also use currentTime-orderTime //.diff give in ms
   const percentProgress = (currentTime.diff(orderTime) / deliveryTime.diff(orderTime)) * 100;
+
+  searchProduct();
 
   updateCartQuantity();
 
@@ -72,8 +75,6 @@ function renderTracking() {
   `;
   
   document.querySelector('.js-order-tracking').innerHTML = trackingHTML;
-
-  console.log(percentProgress);
 }
 
 

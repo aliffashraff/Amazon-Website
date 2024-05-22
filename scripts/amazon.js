@@ -1,9 +1,9 @@
 import {cart, addToCart, updateCartQuantity} from '../data/cart.js';
 import {products, loadProductsFetch} from '../data/products.js';
+import {searchProduct} from './search.js';
 
 async function loadPage() {
   await loadProductsFetch();
-  console.log(products)
   renderProductsGrid();
 }
 loadPage();
@@ -11,9 +11,21 @@ loadPage();
 
 function renderProductsGrid() {
 
-  let productsHTML = ``;
+  const url = new URL(window.location.href);
+  const search = url.searchParams.get('search');
 
-  products.forEach((product) => {
+  let productsHTML = ``;
+  let filterdProducts = products;
+  
+  // If a search exists in the URL parameters,
+  // filter the products that match the search.
+  if (search) {
+    filterdProducts = products.filter((product) => {
+      return product.name.includes(search);
+    })
+  }
+
+  filterdProducts.forEach((product) => {
     productsHTML += `
       <div class="product-container">
         <div class="product-image-container">
@@ -70,6 +82,8 @@ function renderProductsGrid() {
   });
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+  searchProduct();
 
   updateCartQuantity();
 
