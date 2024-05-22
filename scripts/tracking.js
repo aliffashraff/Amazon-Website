@@ -33,6 +33,7 @@ function renderTracking() {
   const deliveryTime = dayjs(matchingOrderProduct.estimatedDeliveryTime);
   //can also use currentTime-orderTime //.diff give in ms
   const percentProgress = (currentTime.diff(orderTime) / deliveryTime.diff(orderTime)) * 100;
+  const deliveredMessage = currentTime > deliveryTime ? 'Delivered on' : 'Arriving on';
 
   searchProduct();
 
@@ -44,7 +45,7 @@ function renderTracking() {
     </a>
 
     <div class="delivery-date">
-      Arriving on ${deliveryTime.format('dddd, MMMM D')}
+      ${deliveredMessage} ${deliveryTime.format('dddd, MMMM D')}
     </div>
 
     <div class="product-info">
