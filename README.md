@@ -1,3 +1,4 @@
+# Amazon Website Clone
 ## Project Details
 1. This project is a clone of amazon.com website. 
 2. It is not 100% similar but it has the basic functionalities of what an ecommerce website should has.
