@@ -34,6 +34,12 @@ function renderProductsGrid() {
     });
   }
 
+  if (filterdProducts == '') {
+    productsHTML = `
+      <div class="empty-results-message">No products matched your search</div>
+    `;
+  }
+
   filterdProducts.forEach((product) => {
     productsHTML += `
       <div class="product-container">
