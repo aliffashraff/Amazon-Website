@@ -1,3 +1,5 @@
+Static site url: https://amazon-clone-9m8m.onrender.com
+
 Touch Up
 
 1. Finish exercise 16 & 17 from supersimple.dev regarding orderSummaryTest.js
