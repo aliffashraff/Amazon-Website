@@ -1,8 +1,8 @@
 # Amazon Website
 
-![Amazon](https://github.com/user-attachments/assets/5bcea896-ae09-411c-b05e-cc5213fcddc5)
+![Amazon](https://github.com/user-attachments/assets/9c8d8fbe-1e13-4d1c-bcae-dd345ec28eb4)
 
-This repository contains the code for an Amazon-like e-commerce website built with modern web technologies.
+This repository contains the code for an Amazon-like e-commerce website, built using JavaScript, HTML, and CSS.
 
 ## Live Demo
 
@@ -13,14 +13,13 @@ Explore the live website: [Amazon Website](https://dashboard.render.com/static/s
 - **Product Catalog**: Browse a variety of products.
 - **Shopping Cart**: Add and manage items in your cart.
 - **User Authentication**: Register, log in, and manage user accounts.
-- **Responsive Design**: Optimized for desktop and mobile devices.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
 ## Technologies Used
 
-- **React.js**: Frontend framework for building user interfaces.
-- **Node.js & Express.js**: Backend server and API.
-- **MongoDB**: NoSQL database for storing product and user data.
-- **Tailwind CSS**: Styling framework for responsive design.
+- **JavaScript**: For interactive elements and functionality.
+- **HTML**: For the structure of the web pages.
+- **CSS**: For styling and layout.
 
 ## Installation
 
@@ -34,36 +33,13 @@ To run this project locally, follow these steps:
 
    `cd Amazon-Website`
 
-3. **Install dependencies:**
+3. **Open the project:**
 
-   - For the frontend:
-
-     `cd frontend`  
-     `npm install`
-
-   - For the backend:
-
-     `cd backend`  
-     `npm install`
-
-4. **Start the servers:**
-
-   - For the frontend:
-
-     `cd frontend`  
-     `npm start`
-
-   - For the backend:
-
-     `cd backend`  
-     `npm start`
-
-   The frontend should be running on `http://localhost:3000` and the backend on `http://localhost:5000`.
+   Open the `index.html` file in your preferred web browser.
 
 ## Usage
 
 - **Frontend**: Access the web interface for browsing products and managing your cart.
-- **Backend**: Handle data operations such as product listings and user management.
 
 ## Contributing
 
