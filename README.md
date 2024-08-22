@@ -35,7 +35,7 @@ To run this project locally, follow these steps:
 
 3. **Open the project:**
 
-   Open the `index.html` file in your preferred web browser.
+   Open the `amazon.html` file in your preferred web browser.
 
 ## Usage
 
