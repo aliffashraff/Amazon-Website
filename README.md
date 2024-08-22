@@ -1,18 +1,18 @@
-# Amazon Website
+# Amazon Clone
 
-![Amazon](https://github.com/user-attachments/assets/9c8d8fbe-1e13-4d1c-bcae-dd345ec28eb4)
+![Amazon](https://github.com/user-attachments/assets/9c8d8fbe-1e13-4d1c-bcae-dd345ec28eb4) <!-- Replace with actual screenshot -->
 
-This repository contains the code for an Amazon-like e-commerce website, built using JavaScript, HTML, and CSS.
+This repository contains the code for a frontend-only clone of Amazon, built using HTML, CSS, and JavaScript.
 
 ## Live Demo
 
-Explore the live website: [Amazon Website](https://dashboard.render.com/static/srv-cqjo3mmehbks73cf4ce0)
+Explore the live website: [Amazon Clone](https://amazon-clone-9m8m.onrender.com)
 
 ## Features
 
-- **Product Catalog**: Browse a variety of products.
-- **Shopping Cart**: Add and manage items in your cart.
-- **User Authentication**: Register, log in, and manage user accounts.
+- **Product Catalog**: Browse and search through a variety of products.
+- **Shopping Cart**: Add items to your cart and manage them.
+- **Order History**: View past purchases and track orders.
 - **Responsive Design**: Optimized for both desktop and mobile devices.
 
 ## Technologies Used
@@ -35,11 +35,11 @@ To run this project locally, follow these steps:
 
 3. **Open the project:**
 
-   Open the `amazon.html` file in your preferred web browser.
+   Open the `index.html` file in your preferred web browser.
 
 ## Usage
 
-- **Frontend**: Access the web interface for browsing products and managing your cart.
+- **Frontend**: Access the web interface to browse products, manage your cart, view order history, and track orders.
 
 ## Contributing
 
